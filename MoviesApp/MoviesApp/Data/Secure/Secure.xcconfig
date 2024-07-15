@@ -1,0 +1,10 @@
+//
+//  Secure.xcconfig
+//  MoviesApp
+//
+//  Created by Ricardo Hernandez on 15/07/24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+TOKEN = eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzNzQxNGRjYmQ5NGY2ODM4MzVkMjY4NmI1MzdlNDA3NiIsIm5iZiI6MTcyMDkxMTI4Ny42NDU1NjksInN1YiI6IjY2OTMwNDgyMDA1M2Y5NzBjODg5M2NmZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uETmqmzVfFcO-k3VOlVkD4Vqe61GB2oVMNCIMFFqB_I

@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Movie: Identifiable {
-    let id = UUID()
+struct Movie: Identifiable, Decodable {
+    var id = UUID()
     let title: String
     let poster_path: String
     let genre_ids: [Int]

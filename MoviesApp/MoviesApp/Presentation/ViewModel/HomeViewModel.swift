@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import os
 
 protocol HomeViewModelType: ObservableObject {
     var items: [Movie] { get set }
@@ -20,6 +21,13 @@ final class HomeViewModel: HomeViewModelType {
     @Published var isLoading: Bool =  true
     @Published var viewType: HomeViewType = .list
     
+    private let logger = Logger()
+    private let getPopularMovies: GetPopularMoviesUseCaseType
+    
+    init(getPopularMovies: GetPopularMoviesUseCaseType) {
+        self.getPopularMovies = getPopularMovies
+    }
+    
     func didTap(on: Movie) {
         
     }
@@ -27,5 +35,14 @@ final class HomeViewModel: HomeViewModelType {
     func viewAppear() {
         isLoading = true
         //TODO: Fetch
+        Task {
+            do {
+                let movies = try await getPopularMovies.execute()
+                isLoading = false
+                items = movies
+            } catch {
+                logger.error("💥 Error fetching popular movies \(error)")
+            }
+        }
     }
 }

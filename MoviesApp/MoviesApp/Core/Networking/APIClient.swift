@@ -69,7 +69,7 @@ final class AuthRestAPIClient: APIClient {
     func perform<T>(request: APIRequest) async throws -> T where T : Decodable {
         let token = try tokenProvider.provide()
         var signedRequest = request
-        signedRequest.headers["Auhtorization"] = "Bearer \(token)"
+        signedRequest.headers["Authorization"] = "Bearer \(token)"
         return try await client.perform(request: signedRequest)
     }
 }
