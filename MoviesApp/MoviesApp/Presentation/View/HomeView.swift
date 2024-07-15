@@ -28,6 +28,21 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
         }.onAppear {
             viewModel.viewAppear()
         }
+        .toolbar {
+            ToolbarItem {
+                Button(action: {
+                    viewModel.viewType = viewModel.viewType == .grid ? .list : .grid
+                }, label: {
+                    if viewModel.viewType == .list {
+                        Image(systemName: "list.bullet")
+                    } else {
+                        Image(systemName: "square.grid.3x3.fill")
+                    }
+                })
+                .tint(.mint)
+            }
+        }
+        .navigationTitle("Movies App")
     }
     
     private func loadingView() -> some View {
@@ -38,8 +53,11 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     
     private func homeList() -> some View {
         List(viewModel.items, id: \.self.title) { movie in
-            HomeViewItem(movie: movie)
+            ListItem(movie: movie)
+                .listRowSeparator(.hidden)
         }
+        .listStyle(.plain)
+        .background(.clear)
     }
     
     private func homeGrid() -> some View {
@@ -50,22 +68,5 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     
     func didTap(on: Movie) {
         
-    }
-}
-
-struct HomeViewItem: View {
-    
-    let movie: Movie
-    
-    var body: some View {
-        VStack {
-            AsyncImage(url: URL(string: movie.poster_path)) { image in
-                image.resizable()
-            } placeholder: {
-                Color.gray
-            }
-            
-            Text(movie.title)
-        }
     }
 }

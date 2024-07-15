@@ -37,11 +37,16 @@ final class HomeViewModel: HomeViewModelType {
         Task {
             do {
                 let movies = try await getPopularMovies.execute()
-                isLoading = false
-                items = movies
+                await update(movies: movies)
             } catch {
                 logger.error("💥 Error fetching popular movies \(error)")
             }
         }
+    }
+    
+    @MainActor
+    private func update(movies: [Movie]) {
+        isLoading = false
+        items = movies
     }
 }

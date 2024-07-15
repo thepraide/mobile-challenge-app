@@ -19,7 +19,7 @@ final class GetPopularMoviesUseCase: GetPopularMoviesUseCaseType {
     
     func execute() async throws -> [Movie] {
         let api = PopularMoviesAPI(page: 1)
-        let response: PopularMoviesAPIResponse = try await apiClient.perform(request: api)
+        let response: MoviesAPIResponse = try await apiClient.perform(request: api)
         return response.results
     }
 }
