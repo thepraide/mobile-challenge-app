@@ -7,14 +7,13 @@
 
 import Foundation
 
-struct Movie: Identifiable, Decodable {
-    var id = UUID()
+struct Movie: Decodable {
     let title: String
     let poster_path: String
     let genre_ids: [Int]
     let overview: String
     let popularity: Double
-    let release_date: Date
+    let release_date: String
     let original_language: String
     let vote_average: Double
 }

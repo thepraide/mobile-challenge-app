@@ -37,10 +37,8 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     }
     
     private func homeList() -> some View {
-        List {
-            ForEach(viewModel.items) { movie in
-                HomeViewItem(movie: movie)
-            }
+        List(viewModel.items, id: \.self.title) { movie in
+            HomeViewItem(movie: movie)
         }
     }
     

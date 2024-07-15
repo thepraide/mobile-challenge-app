@@ -34,7 +34,6 @@ final class HomeViewModel: HomeViewModelType {
     
     func viewAppear() {
         isLoading = true
-        //TODO: Fetch
         Task {
             do {
                 let movies = try await getPopularMovies.execute()
