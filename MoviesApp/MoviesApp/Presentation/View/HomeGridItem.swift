@@ -20,7 +20,7 @@ struct HomeGridItem: View {
                 Color.gray
             }
             .frame(width: 100, height: 150)
-            .cornerRadius(5)
+            .cornerRadius(10)
             
             Text(movie.title)
                 .font(.footnote)

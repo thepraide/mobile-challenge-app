@@ -39,7 +39,7 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
                         Image(systemName: "list.bullet")
                     }
                 })
-                .tint(.mint)
+                .tint(.accentColor)
             }
         }
         .navigationTitle("Movies App")
@@ -67,7 +67,7 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
                     HomeGridItem(movie: movie)
                 }
             }
-        }        
+        }
     }
     
     func didTap(on: Movie) {

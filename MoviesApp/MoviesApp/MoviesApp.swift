@@ -13,11 +13,22 @@ struct MoviesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            NavigationView {
-                HomeViewModule.compose()
+            TabView {
+                NavigationView {
+                    HomeViewModule.compose()
+                }
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
+                
+                
+                NavigationView {
+                    EmptyView()
+                }
+                .tabItem {
+                    Label("Favorites", systemImage: "heart.fill")
+                }
             }
-//            ContentView()
-//                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
     }
 }

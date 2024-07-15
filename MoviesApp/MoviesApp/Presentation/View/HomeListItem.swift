@@ -20,10 +20,12 @@ struct HomeListItem: View {
                 Color.gray
             }
             .frame(width: 100, height: 150)
+            .cornerRadius(10)
             
             VStack(alignment: .leading) {
                 Text(movie.title)
                     .font(.headline)
+                    .frame(maxWidth: .infinity, alignment: .leading)
                 Text(movie.release_date)
                     .font(.caption)
                     .padding(.bottom, 3)
@@ -34,7 +36,5 @@ struct HomeListItem: View {
             }
         }
         .frame(maxWidth: .infinity)
-        .background(Color.accentColor)
-        .cornerRadius(5)
     }
 }
