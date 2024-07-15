@@ -8,6 +8,6 @@
 import Foundation
 
 protocol HomeView {
-    var items: [Movies]
+    var items: [Movie] { get }
 }
 
