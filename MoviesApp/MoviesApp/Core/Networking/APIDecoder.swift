@@ -5,6 +5,8 @@
 //  Created by Ricardo Hernandez on 15/07/24.
 //
 
+import Foundation
+
 protocol APIDecoder {
     func decode<T: Decodable>(data: Data) throws -> T
 }
