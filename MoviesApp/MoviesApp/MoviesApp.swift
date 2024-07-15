@@ -13,7 +13,9 @@ struct MoviesApp: App {
 
     var body: some Scene {
         WindowGroup {
-            HomeViewModule.compose()
+            NavigationView {
+                HomeViewModule.compose()
+            }
 //            ContentView()
 //                .environment(\.managedObjectContext, persistenceController.container.viewContext)
         }
