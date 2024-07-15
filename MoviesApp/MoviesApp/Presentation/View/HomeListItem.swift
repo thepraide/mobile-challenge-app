@@ -1,5 +1,5 @@
 //
-//  ListItem.swift
+//  HomeListItem.swift
 //  MoviesApp
 //
 //  Created by Ricardo Hernandez on 15/07/24.
@@ -7,14 +7,10 @@
 
 import SwiftUI
 
-protocol ListItemViewModel {
-    
-}
-
-struct ListItem: View {
+struct HomeListItem: View {
     
     let movie: Movie
-    let imageBasePath: String = "https://image.tmdb.org/t/p/w92/"
+    let imageBasePath: String = "https://image.tmdb.org/t/p/w154/"
     
     var body: some View {
         HStack {

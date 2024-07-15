@@ -34,9 +34,9 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
                     viewModel.viewType = viewModel.viewType == .grid ? .list : .grid
                 }, label: {
                     if viewModel.viewType == .list {
-                        Image(systemName: "list.bullet")
-                    } else {
                         Image(systemName: "square.grid.3x3.fill")
+                    } else {
+                        Image(systemName: "list.bullet")
                     }
                 })
                 .tint(.mint)
@@ -53,7 +53,7 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     
     private func homeList() -> some View {
         List(viewModel.items, id: \.self.title) { movie in
-            ListItem(movie: movie)
+            HomeListItem(movie: movie)
                 .listRowSeparator(.hidden)
         }
         .listStyle(.plain)
@@ -61,9 +61,13 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     }
     
     private func homeGrid() -> some View {
-        Grid {
-            
-        }
+        ScrollView {
+            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())] , spacing: 20) {
+                ForEach(viewModel.items, id: \.self.title) { movie in
+                    HomeGridItem(movie: movie)
+                }
+            }
+        }        
     }
     
     func didTap(on: Movie) {
