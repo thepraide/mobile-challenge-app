@@ -38,6 +38,10 @@
 		B9E422222C46603300BC47EF /* GenresAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422212C46603300BC47EF /* GenresAPIResponse.swift */; };
 		B9E422242C46606800BC47EF /* GetGenresUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422232C46606800BC47EF /* GetGenresUseCase.swift */; };
 		B9E422262C46625000BC47EF /* AppStartModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422252C46625000BC47EF /* AppStartModule.swift */; };
+		B9E422282C46679100BC47EF /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422272C46679100BC47EF /* DetailView.swift */; };
+		B9E4222A2C466CF400BC47EF /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422292C466CF400BC47EF /* DetailViewModel.swift */; };
+		B9E4222D2C467DDF00BC47EF /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E4222C2C467DDF00BC47EF /* HomeRouter.swift */; };
+		B9E4222F2C46816000BC47EF /* DetailViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E4222E2C46816000BC47EF /* DetailViewModule.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +98,10 @@
 		B9E422212C46603300BC47EF /* GenresAPIResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresAPIResponse.swift; sourceTree = "<group>"; };
 		B9E422232C46606800BC47EF /* GetGenresUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGenresUseCase.swift; sourceTree = "<group>"; };
 		B9E422252C46625000BC47EF /* AppStartModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStartModule.swift; sourceTree = "<group>"; };
+		B9E422272C46679100BC47EF /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
+		B9E422292C466CF400BC47EF /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		B9E4222C2C467DDF00BC47EF /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
+		B9E4222E2C46816000BC47EF /* DetailViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModule.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +226,7 @@
 		B9E421E92C433AA700BC47EF /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				B9E4222B2C467DCE00BC47EF /* Router */,
 				B9E422002C453FFA00BC47EF /* ViewModel */,
 				B9E421FF2C453FB400BC47EF /* View */,
 			);
@@ -258,6 +267,7 @@
 				B9E421EC2C433AD400BC47EF /* HomeView.swift */,
 				B9E422192C457A7500BC47EF /* HomeListItem.swift */,
 				B9E4221B2C457A8500BC47EF /* HomeGridItem.swift */,
+				B9E422272C46679100BC47EF /* DetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -266,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				B9E422012C45566B00BC47EF /* HomeViewModel.swift */,
+				B9E422292C466CF400BC47EF /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -275,6 +286,7 @@
 			children = (
 				B9E422252C46625000BC47EF /* AppStartModule.swift */,
 				B9E422042C45577600BC47EF /* HomeViewModule.swift */,
+				B9E4222E2C46816000BC47EF /* DetailViewModule.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -305,6 +317,14 @@
 				B9E422212C46603300BC47EF /* GenresAPIResponse.swift */,
 			);
 			path = Response;
+			sourceTree = "<group>";
+		};
+		B9E4222B2C467DCE00BC47EF /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				B9E4222C2C467DDF00BC47EF /* HomeRouter.swift */,
+			);
+			path = Router;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -441,9 +461,13 @@
 				B9E421F62C45018100BC47EF /* Movie.swift in Sources */,
 				B9E422022C45566B00BC47EF /* HomeViewModel.swift in Sources */,
 				B9E422202C465FFF00BC47EF /* Genre.swift in Sources */,
+				B9E4222A2C466CF400BC47EF /* DetailViewModel.swift in Sources */,
 				B9E422172C4574EB00BC47EF /* MoviesAPIResponse.swift in Sources */,
+				B9E4222F2C46816000BC47EF /* DetailViewModule.swift in Sources */,
 				B9E421C12C43353400BC47EF /* Persistence.swift in Sources */,
 				B9E4221C2C457A8500BC47EF /* HomeGridItem.swift in Sources */,
+				B9E422282C46679100BC47EF /* DetailView.swift in Sources */,
+				B9E4222D2C467DDF00BC47EF /* HomeRouter.swift in Sources */,
 				B9E421F82C453BFA00BC47EF /* TokenProvider.swift in Sources */,
 				B9E4221E2C465F8000BC47EF /* GenresAPI.swift in Sources */,
 				B9E4220A2C45598000BC47EF /* PlayingMoviesAPI.swift in Sources */,

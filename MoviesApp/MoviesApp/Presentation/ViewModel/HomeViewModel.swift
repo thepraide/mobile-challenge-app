@@ -13,7 +13,6 @@ protocol HomeViewModelType: ObservableObject {
     var isLoading: Bool { get set }
     var viewType: HomeViewType { get set }
     var featuring: Featuring { get set }
-    func didTap(on: Movie)
     func viewAppear()
 }
 
@@ -78,9 +77,5 @@ final class HomeViewModel: HomeViewModelType {
     private func update(loading: Bool = false, movies: [Movie]) {
         isLoading = loading
         items = movies
-    }
-    
-    func didTap(on: Movie) {
-        
     }
 }

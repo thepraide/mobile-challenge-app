@@ -26,6 +26,7 @@ enum Featuring: String, CaseIterable {
 
 struct HomeView<ViewModel: HomeViewModelType>: View {
    
+    @EnvironmentObject var router: HomeRouter
     @StateObject var viewModel: ViewModel
     
     var body: some View {
@@ -75,6 +76,9 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
             List(viewModel.items, id: \.self.id) { movie in
                 HomeListItem(movie: movie)
                     .listRowSeparator(.hidden)
+                    .onTapGesture {
+                        router.navigate(to: .detail(movie: movie))
+                    }
             }
             .listStyle(.plain)
             .background(.clear)
@@ -89,13 +93,12 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())] , spacing: 20) {
                     ForEach(viewModel.items, id: \.self.id) { movie in
                         HomeGridItem(movie: movie)
+                            .onTapGesture {
+                                router.navigate(to: .detail(movie: movie))
+                            }
                     }
                 }
             }
         }
-    }
-    
-    func didTap(on: Movie) {
-        
     }
 }

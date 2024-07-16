@@ -11,6 +11,7 @@ import SwiftUI
 struct MoviesApp: App {
     
     let persistenceController = PersistenceController.shared
+    @ObservedObject var homeRouter = HomeRouter()
     
     init() {
         AppStartModule.start()
@@ -19,9 +20,16 @@ struct MoviesApp: App {
     var body: some Scene {
         WindowGroup {
             TabView {
-                NavigationView {
+                NavigationStack(path: $homeRouter.navPath) {
                     HomeViewModule.compose()
+                        .navigationDestination(for: HomeRouter.Destination.self) { destination in
+                            switch destination {
+                            case .detail(movie: let movie):
+                                DetailViewModule.compose(movie: movie)
+                            }
+                        }
                 }
+                .environmentObject(homeRouter)
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
