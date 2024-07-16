@@ -10,6 +10,18 @@ import SwiftUI
 enum HomeViewType {
     case list
     case grid
+    
+    func icon() -> String {
+        switch self {
+        case .list: return "list.bullet"
+        case .grid: return "square.grid.3x3.fill"
+        }
+    }
+}
+
+enum Featuring: String, CaseIterable {
+    case popular = "Most Popular"
+    case playing = "Now Playing"
 }
 
 struct HomeView<ViewModel: HomeViewModelType>: View {
@@ -20,29 +32,34 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
         Group {
             if viewModel.isLoading {
                 loadingView()
-            } else if viewModel.viewType == .list {
-                homeList()
             } else {
-                homeGrid()
+                switch viewModel.viewType {
+                case .list: homeList()
+                case .grid: homeGrid()
+                }
             }
-        }.onAppear {
-            viewModel.viewAppear()
-        }
-        .toolbar {
+        }.toolbar {
             ToolbarItem {
                 Button(action: {
                     viewModel.viewType = viewModel.viewType == .grid ? .list : .grid
                 }, label: {
-                    if viewModel.viewType == .list {
-                        Image(systemName: "square.grid.3x3.fill")
-                    } else {
-                        Image(systemName: "list.bullet")
-                    }
+                    Image(systemName: viewModel.viewType.icon())
                 })
                 .tint(.accentColor)
             }
         }
         .navigationTitle("Movies App")
+        .onAppear {
+            viewModel.viewAppear()
+        }
+    }
+    
+    func makeFeaturingPicker() -> some View {
+        Picker("Featuring", selection: $viewModel.featuring) {
+            ForEach(Featuring.allCases, id: \.rawValue) { type in
+                Text(type.rawValue).tag(type)
+            }
+        }.pickerStyle(SegmentedPickerStyle())
     }
     
     private func loadingView() -> some View {
@@ -52,19 +69,27 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     }
     
     private func homeList() -> some View {
-        List(viewModel.items, id: \.self.title) { movie in
-            HomeListItem(movie: movie)
-                .listRowSeparator(.hidden)
+        VStack {
+            makeFeaturingPicker()
+            
+            List(viewModel.items, id: \.self.id) { movie in
+                HomeListItem(movie: movie)
+                    .listRowSeparator(.hidden)
+            }
+            .listStyle(.plain)
+            .background(.clear)
         }
-        .listStyle(.plain)
-        .background(.clear)
     }
     
     private func homeGrid() -> some View {
-        ScrollView {
-            LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())] , spacing: 20) {
-                ForEach(viewModel.items, id: \.self.title) { movie in
-                    HomeGridItem(movie: movie)
+        VStack {
+            makeFeaturingPicker()
+            
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())] , spacing: 20) {
+                    ForEach(viewModel.items, id: \.self.id) { movie in
+                        HomeGridItem(movie: movie)
+                    }
                 }
             }
         }

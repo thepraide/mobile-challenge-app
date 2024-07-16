@@ -34,7 +34,18 @@ struct HomeListItem: View {
                     .lineLimit(2)
                    
             }
+            
+            VStack {
+                Button {
+                    print("liked")
+                } label: {
+                    Image(systemName: "heart")
+                        .padding(.top, 10)
+                }
+                .clipped()
+                .buttonStyle(BorderlessButtonStyle())
+                Spacer()
+            }
         }
-        .frame(maxWidth: .infinity)
     }
 }

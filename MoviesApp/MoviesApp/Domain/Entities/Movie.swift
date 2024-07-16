@@ -8,6 +8,7 @@
 import Foundation
 
 struct Movie: Decodable {
+    let id: Int
     let title: String
     let poster_path: String
     let genre_ids: [Int]

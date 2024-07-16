@@ -20,6 +20,19 @@ struct HomeGridItem: View {
                 Color.gray
             }
             .frame(width: 100, height: 150)
+            .overlay {
+                LinearGradient(gradient: Gradient(colors: [.black, .clear, .clear]), startPoint: .top, endPoint: .bottom)
+            }
+            .overlay(alignment: .topTrailing) {
+                Button {
+                    print("liked")
+                } label: {
+                    Image(systemName: "heart")
+                        .padding([.top, .trailing], 10)
+                }
+                .clipped()
+                .buttonStyle(BorderlessButtonStyle())
+            }
             .cornerRadius(10)
             
             Text(movie.title)

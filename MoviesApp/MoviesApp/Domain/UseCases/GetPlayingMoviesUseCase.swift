@@ -9,7 +9,7 @@ protocol GetPlayingMoviesUseCaseType {
     func execute() async throws -> [Movie]
 }
 
-final class GetPlatingMoviesUseCase: GetPopularMoviesUseCaseType {
+final class GetPlayingMoviesUseCase: GetPlayingMoviesUseCaseType {
     
     private let apiClient: APIClient
     

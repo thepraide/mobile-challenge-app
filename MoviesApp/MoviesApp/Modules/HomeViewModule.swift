@@ -13,7 +13,9 @@ enum HomeViewModule {
         let client = RestAPIClient(host: "https://api.themoviedb.org")
         let authClient = AuthRestAPIClient(client: client, tokenProvider: LocalTokenProvider())
         let popularMoviesUseCase = GetPopularMoviesUseCase(apiClient: authClient)
-        let viewModel = HomeViewModel(getPopularMovies: popularMoviesUseCase)
+        let playingMoviesUseCase = GetPlayingMoviesUseCase(apiClient: authClient)
+        let viewModel = HomeViewModel(getPopularMovies: popularMoviesUseCase,
+                                      getPlayingMovies: playingMoviesUseCase)
         return HomeView(viewModel: viewModel)
     }
 }
