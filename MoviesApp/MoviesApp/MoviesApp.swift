@@ -9,8 +9,13 @@ import SwiftUI
 
 @main
 struct MoviesApp: App {
+    
     let persistenceController = PersistenceController.shared
-
+    
+    init() {
+        AppStartModule.start()
+    }
+    
     var body: some Scene {
         WindowGroup {
             TabView {
