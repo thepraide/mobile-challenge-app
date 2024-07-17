@@ -49,23 +49,13 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
             Text(viewModel.movie.release_date)
                 .font(.caption2)
             
-            HStack {
-                ForEach(viewModel.genres, id: \.id) { genre in
-                    Text(genre.name)
-                        .font(.caption2)
-                        .padding(5)
-                        .overlay {
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.accent, lineWidth: 1)
-                        }
-                }
-            }
+            GenresList(genres: viewModel.genres)
             
             HStack {
                 Text("Popularity: \(viewModel.movie.popularity)")
                     .font(.caption2)
                 Spacer()
-                makeVoteAverage()
+                VotesView(average: viewModel.movie.vote_average)
                     .frame(width: 40, height: 40)
             }
             .padding(.vertical, 10)
@@ -74,28 +64,5 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
                 .font(.caption)
         }
         .padding(20)
-    }
-    
-    private func makeVoteAverage() -> some View {
-        ZStack {
-            Circle()
-                .stroke(
-                    Color.accentColor.opacity(0.5),
-                    lineWidth: 5
-                )
-            Text("\(Int(viewModel.movie.vote_average*10))%")
-                .font(.caption)
-                .bold()
-            Circle()
-                .trim(from: 0, to: viewModel.movie.vote_average/10)
-                .stroke(
-                    Color.accentColor,
-                    style: StrokeStyle(
-                        lineWidth: 5,
-                        lineCap: .round
-                    )
-                )
-                .rotationEffect(.degrees(-90))
-        }
     }
 }

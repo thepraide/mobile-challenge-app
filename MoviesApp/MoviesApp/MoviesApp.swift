@@ -36,7 +36,7 @@ struct MoviesApp: App {
                 
                 
                 NavigationView {
-                    EmptyView()
+                    FavoriteViewModule.compose()
                 }
                 .tabItem {
                     Label("Favorites", systemImage: "heart.fill")

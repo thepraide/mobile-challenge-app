@@ -10,6 +10,12 @@
 		B99438C32C47933900BE02A5 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C22C47933900BE02A5 /* Image+Data.swift */; };
 		B99438C52C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C42C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift */; };
 		B99438C72C47AF5900BE02A5 /* FavoriteMovie+Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C62C47AF5900BE02A5 /* FavoriteMovie+Movie.swift */; };
+		B99438C92C47BF8000BE02A5 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C82C47BF8000BE02A5 /* FavoritesView.swift */; };
+		B99438CC2C47C55400BE02A5 /* GenresList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438CB2C47C55400BE02A5 /* GenresList.swift */; };
+		B99438CE2C47C5B400BE02A5 /* VotesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438CD2C47C5B400BE02A5 /* VotesView.swift */; };
+		B99438D02C47C99400BE02A5 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438CF2C47C99400BE02A5 /* FavoritesViewModel.swift */; };
+		B99438D22C47CAF100BE02A5 /* FavoriteViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438D12C47CAF100BE02A5 /* FavoriteViewModule.swift */; };
+		B99438D72C47CC5100BE02A5 /* FavoritesItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438D62C47CC5100BE02A5 /* FavoritesItemView.swift */; };
 		B9E421B82C43353300BC47EF /* MoviesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E421B72C43353200BC47EF /* MoviesApp.swift */; };
 		B9E421BC2C43353400BC47EF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9E421BB2C43353400BC47EF /* Assets.xcassets */; };
 		B9E421BF2C43353400BC47EF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B9E421BE2C43353400BC47EF /* Preview Assets.xcassets */; };
@@ -73,6 +79,12 @@
 		B99438C22C47933900BE02A5 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		B99438C42C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteMovieUseCase.swift; sourceTree = "<group>"; };
 		B99438C62C47AF5900BE02A5 /* FavoriteMovie+Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+Movie.swift"; sourceTree = "<group>"; };
+		B99438C82C47BF8000BE02A5 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		B99438CB2C47C55400BE02A5 /* GenresList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenresList.swift; sourceTree = "<group>"; };
+		B99438CD2C47C5B400BE02A5 /* VotesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VotesView.swift; sourceTree = "<group>"; };
+		B99438CF2C47C99400BE02A5 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
+		B99438D12C47CAF100BE02A5 /* FavoriteViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModule.swift; sourceTree = "<group>"; };
+		B99438D62C47CC5100BE02A5 /* FavoritesItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesItemView.swift; sourceTree = "<group>"; };
 		B9E421B42C43353200BC47EF /* MoviesApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoviesApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B9E421B72C43353200BC47EF /* MoviesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesApp.swift; sourceTree = "<group>"; };
 		B9E421BB2C43353400BC47EF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -152,6 +164,42 @@
 				B99438C62C47AF5900BE02A5 /* FavoriteMovie+Movie.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		B99438CA2C47C53900BE02A5 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B99438CB2C47C55400BE02A5 /* GenresList.swift */,
+				B99438CD2C47C5B400BE02A5 /* VotesView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B99438D32C47CC3100BE02A5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				B9E421EC2C433AD400BC47EF /* HomeView.swift */,
+				B9E422192C457A7500BC47EF /* HomeListItem.swift */,
+				B9E4221B2C457A8500BC47EF /* HomeGridItem.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		B99438D42C47CC3700BE02A5 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				B9E422272C46679100BC47EF /* DetailView.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		B99438D52C47CC4000BE02A5 /* Favorites */ = {
+			isa = PBXGroup;
+			children = (
+				B99438C82C47BF8000BE02A5 /* FavoritesView.swift */,
+				B99438D62C47CC5100BE02A5 /* FavoritesItemView.swift */,
+			);
+			path = Favorites;
 			sourceTree = "<group>";
 		};
 		B9E421AB2C43353200BC47EF = {
@@ -294,10 +342,10 @@
 		B9E421FF2C453FB400BC47EF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				B9E421EC2C433AD400BC47EF /* HomeView.swift */,
-				B9E422192C457A7500BC47EF /* HomeListItem.swift */,
-				B9E4221B2C457A8500BC47EF /* HomeGridItem.swift */,
-				B9E422272C46679100BC47EF /* DetailView.swift */,
+				B99438D52C47CC4000BE02A5 /* Favorites */,
+				B99438D42C47CC3700BE02A5 /* Detail */,
+				B99438D32C47CC3100BE02A5 /* Home */,
+				B99438CA2C47C53900BE02A5 /* Components */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -308,6 +356,7 @@
 				B9E422012C45566B00BC47EF /* HomeViewModel.swift */,
 				B9E422382C47755100BC47EF /* HomeItemViewModel.swift */,
 				B9E422292C466CF400BC47EF /* DetailViewModel.swift */,
+				B99438CF2C47C99400BE02A5 /* FavoritesViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -318,6 +367,7 @@
 				B9E422252C46625000BC47EF /* AppStartModule.swift */,
 				B9E422042C45577600BC47EF /* HomeViewModule.swift */,
 				B9E4222E2C46816000BC47EF /* DetailViewModule.swift */,
+				B99438D12C47CAF100BE02A5 /* FavoriteViewModule.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -501,15 +551,20 @@
 				B9E4221C2C457A8500BC47EF /* HomeGridItem.swift in Sources */,
 				B9E422282C46679100BC47EF /* DetailView.swift in Sources */,
 				B9E4222D2C467DDF00BC47EF /* HomeRouter.swift in Sources */,
+				B99438CC2C47C55400BE02A5 /* GenresList.swift in Sources */,
 				B99438C32C47933900BE02A5 /* Image+Data.swift in Sources */,
 				B99438C52C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift in Sources */,
+				B99438D02C47C99400BE02A5 /* FavoritesViewModel.swift in Sources */,
 				B9E421F82C453BFA00BC47EF /* TokenProvider.swift in Sources */,
+				B99438D72C47CC5100BE02A5 /* FavoritesItemView.swift in Sources */,
 				B9E4221E2C465F8000BC47EF /* GenresAPI.swift in Sources */,
 				B9E4220A2C45598000BC47EF /* PlayingMoviesAPI.swift in Sources */,
 				B9E4220C2C455F5000BC47EF /* GetPopularMoviesUseCase.swift in Sources */,
+				B99438C92C47BF8000BE02A5 /* FavoritesView.swift in Sources */,
 				B9E422352C472C0C00BC47EF /* GetMovieGenres.swift in Sources */,
 				B99438C72C47AF5900BE02A5 /* FavoriteMovie+Movie.swift in Sources */,
 				B9E421FC2C453C3F00BC47EF /* APIDecoder.swift in Sources */,
+				B99438D22C47CAF100BE02A5 /* FavoriteViewModule.swift in Sources */,
 				B9E422132C45667800BC47EF /* LocalTokenProvider.swift in Sources */,
 				B9E422052C45577600BC47EF /* HomeViewModule.swift in Sources */,
 				B9E422242C46606800BC47EF /* GetGenresUseCase.swift in Sources */,
@@ -525,6 +580,7 @@
 				B9E421FA2C453C1D00BC47EF /* APIRequest.swift in Sources */,
 				B9E421F02C4347A600BC47EF /* APIClient.swift in Sources */,
 				B9E4223D2C47856D00BC47EF /* ImagesAPI.swift in Sources */,
+				B99438CE2C47C5B400BE02A5 /* VotesView.swift in Sources */,
 				B9E422372C47602600BC47EF /* SaveMovieUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
