@@ -9,6 +9,7 @@ import Foundation
 
 protocol APIClient {
     func perform<T: Decodable>(request: APIRequest) async throws -> T
+    func perform(request: APIRequest) async throws -> Data
 }
 
 enum APIClientError: Error {
@@ -32,6 +33,11 @@ final class RestAPIClient: APIClient {
     }
     
     func perform<T>(request: APIRequest) async throws -> T where T : Decodable {
+        let data = try await self.perform(request: request)
+        return try decoder.decode(data: data)
+    }
+    
+    func perform(request: APIRequest) async throws -> Data {
         guard var components = URLComponents(string: host), !request.endpoint.isEmpty else {
             throw APIClientError.badURL
         }
@@ -51,9 +57,8 @@ final class RestAPIClient: APIClient {
         if httpResponse.statusCode == 401 {
             throw APIClientError.unauthorized
         }
-        return try decoder.decode(data: data)
+        return data
     }
-    
 }
 
 final class AuthRestAPIClient: APIClient {
