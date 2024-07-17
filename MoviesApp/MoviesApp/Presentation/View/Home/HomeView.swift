@@ -31,6 +31,9 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
     
     var body: some View {
         Group {
+            if let error = viewModel.errorBanner {
+                Text(error)
+            }
             if viewModel.isLoading {
                 loadingView()
             } else {

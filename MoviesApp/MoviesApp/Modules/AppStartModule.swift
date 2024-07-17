@@ -22,7 +22,6 @@ enum AppStartModule  {
             } catch {
                 logger.error("💥 Error fetching popular movies \(error)")
             }
-            
         }
     }
 }

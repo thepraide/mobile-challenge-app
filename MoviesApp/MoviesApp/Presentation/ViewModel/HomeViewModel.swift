@@ -7,9 +7,11 @@
 
 import SwiftUI
 import os
+import Network
 
 protocol HomeViewModelType: ObservableObject {
     var items: [Movie] { get set }
+    var errorBanner: String? { get set }
     var isLoading: Bool { get set }
     var viewType: HomeViewType { get set }
     var featuring: Featuring { get set }
@@ -20,7 +22,8 @@ protocol HomeViewModelType: ObservableObject {
 
 final class HomeViewModel: HomeViewModelType {
     @Published var items: [Movie] = []
-    @Published var isLoading: Bool =  true
+    @Published var isLoading: Bool = true
+    @Published var errorBanner: String? = nil
     @Published var viewType: HomeViewType = .list
     @Published var featuring: Featuring = .popular {
         didSet {
@@ -30,6 +33,7 @@ final class HomeViewModel: HomeViewModelType {
     }
     private var page: Int = 1
     private let logger = Logger()
+    private let monitor = NWPathMonitor()
     private let getPopularMovies: GetPopularMoviesUseCaseType
     private let getPlayingMovies: GetPlayingMoviesUseCaseType
     private let getPosterMovie: GetPosterUseCaseType
@@ -51,6 +55,7 @@ final class HomeViewModel: HomeViewModelType {
     func viewAppear() {
         page = 1
         fetchMovies(loading: true)
+        checkInternetConnection()
     }
     
     func showed(item: Movie) {
@@ -89,6 +94,19 @@ final class HomeViewModel: HomeViewModelType {
                 logger.error("💥 Error saving movie \(error)")
             }
         }
+    }
+    
+    private func checkInternetConnection() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            print(path.status)
+            if path.status == .satisfied {
+                self?.updateErrorBanner(value: nil)
+            } else {
+                self?.updateErrorBanner(value: "🛜 No Internet connection!")
+            }
+        }
+        let queue = DispatchQueue(label: "Monitor")
+        monitor.start(queue: queue)
     }
     
     private func fetchMovies(loading: Bool) {
@@ -130,6 +148,14 @@ final class HomeViewModel: HomeViewModelType {
                 }
             } catch {
                 logger.error("💥 Error fetching playing movies \(error)")
+            }
+        }
+    }
+    
+    private func updateErrorBanner(value: String?) {
+        Task {
+            await MainActor.run {
+                errorBanner = value
             }
         }
     }
