@@ -22,5 +22,4 @@ final class GetGenresUseCase: GetGenresUseCaseType {
         let response: GenresAPIResponse = try await apiClient.perform(request: api)
         return response.genres
     }
-    
 }

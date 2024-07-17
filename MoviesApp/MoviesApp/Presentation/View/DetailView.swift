@@ -13,19 +13,31 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
     let imageBasePath: String = "https://image.tmdb.org/t/p/w500/"
     
     var body: some View {
-        VStack() {
-            AsyncImage(url: URL(string: imageBasePath + viewModel.movie.poster_path)) { image in
-                image.resizable()
-            } placeholder: {
-                Color.gray
+        ScrollView {
+            VStack() {
+                makeHeader()
+                makeBottomContainer()
+                Spacer()
             }
-            .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height/3)
-            
-            makeBottomContainer()
-            
-            Spacer()
         }
         .navigationBarTitleDisplayMode(.inline)
+        .edgesIgnoringSafeArea(.top)
+        .onAppear {
+            viewModel.viewAppear()
+        }
+    }
+    
+    private func makeHeader() -> some View {
+        AsyncImage(url: URL(string: imageBasePath + viewModel.movie.poster_path)) { image in
+            image.resizable()
+        } placeholder: {
+            Color.gray
+        }
+        .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height/2)
+        .overlay {
+            LinearGradient(colors: [.black, .clear], 
+                           startPoint: .top, endPoint: .bottom)
+        }
     }
     
     private func makeBottomContainer() -> some View {
@@ -40,6 +52,12 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
             HStack {
                 ForEach(viewModel.genres, id: \.id) { genre in
                     Text(genre.name)
+                        .font(.caption2)
+                        .padding(5)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 10)
+                                .stroke(.accent, lineWidth: 1)
+                        }
                 }
             }
             
@@ -77,6 +95,7 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
                         lineCap: .round
                     )
                 )
+                .rotationEffect(.degrees(-90))
         }
     }
 }

@@ -13,11 +13,12 @@ enum AppStartModule  {
         let client = RestAPIClient(host: "https://api.themoviedb.org")
         let authClient = AuthRestAPIClient(client: client, tokenProvider: LocalTokenProvider())
         let getGenresUseCase = GetGenresUseCase(apiClient: authClient)
+        let saveGenresUseCase = SaveGenresUseCase()
         let logger = Logger()
         Task {
             do {
                 let genres = try await getGenresUseCase.execute()
-                print(genres)
+                try await saveGenresUseCase.execute(genres: genres)
             } catch {
                 logger.error("💥 Error fetching popular movies \(error)")
             }

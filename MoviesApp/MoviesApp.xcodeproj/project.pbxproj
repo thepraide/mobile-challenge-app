@@ -42,6 +42,8 @@
 		B9E4222A2C466CF400BC47EF /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422292C466CF400BC47EF /* DetailViewModel.swift */; };
 		B9E4222D2C467DDF00BC47EF /* HomeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E4222C2C467DDF00BC47EF /* HomeRouter.swift */; };
 		B9E4222F2C46816000BC47EF /* DetailViewModule.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E4222E2C46816000BC47EF /* DetailViewModule.swift */; };
+		B9E422312C470E7000BC47EF /* SaveGenresUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422302C470E7000BC47EF /* SaveGenresUseCase.swift */; };
+		B9E422352C472C0C00BC47EF /* GetMovieGenres.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9E422342C472C0C00BC47EF /* GetMovieGenres.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +104,8 @@
 		B9E422292C466CF400BC47EF /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		B9E4222C2C467DDF00BC47EF /* HomeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeRouter.swift; sourceTree = "<group>"; };
 		B9E4222E2C46816000BC47EF /* DetailViewModule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModule.swift; sourceTree = "<group>"; };
+		B9E422302C470E7000BC47EF /* SaveGenresUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveGenresUseCase.swift; sourceTree = "<group>"; };
+		B9E422342C472C0C00BC47EF /* GetMovieGenres.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetMovieGenres.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +214,8 @@
 				B9E4220B2C455F5000BC47EF /* GetPopularMoviesUseCase.swift */,
 				B9E4220D2C45614E00BC47EF /* GetPlayingMoviesUseCase.swift */,
 				B9E422232C46606800BC47EF /* GetGenresUseCase.swift */,
+				B9E422302C470E7000BC47EF /* SaveGenresUseCase.swift */,
+				B9E422342C472C0C00BC47EF /* GetMovieGenres.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -472,6 +478,7 @@
 				B9E4221E2C465F8000BC47EF /* GenresAPI.swift in Sources */,
 				B9E4220A2C45598000BC47EF /* PlayingMoviesAPI.swift in Sources */,
 				B9E4220C2C455F5000BC47EF /* GetPopularMoviesUseCase.swift in Sources */,
+				B9E422352C472C0C00BC47EF /* GetMovieGenres.swift in Sources */,
 				B9E421FC2C453C3F00BC47EF /* APIDecoder.swift in Sources */,
 				B9E422132C45667800BC47EF /* LocalTokenProvider.swift in Sources */,
 				B9E422052C45577600BC47EF /* HomeViewModule.swift in Sources */,
@@ -483,6 +490,7 @@
 				B9E422262C46625000BC47EF /* AppStartModule.swift in Sources */,
 				B9E422222C46603300BC47EF /* GenresAPIResponse.swift in Sources */,
 				B9E421ED2C433AD400BC47EF /* HomeView.swift in Sources */,
+				B9E422312C470E7000BC47EF /* SaveGenresUseCase.swift in Sources */,
 				B9E421B82C43353300BC47EF /* MoviesApp.swift in Sources */,
 				B9E421FA2C453C1D00BC47EF /* APIRequest.swift in Sources */,
 				B9E421F02C4347A600BC47EF /* APIClient.swift in Sources */,

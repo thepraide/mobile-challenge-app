@@ -10,7 +10,9 @@ import SwiftUI
 enum DetailViewModule {
     
     static func compose(movie: Movie) -> some View {
-        let viewModel = DetailViewModel(movie: movie)
+        let getMoviesGenres = GetMovieGenres()
+        let viewModel = DetailViewModel(movie: movie,
+                                        getMovieGenres: getMoviesGenres)
         return DetailView(viewModel: viewModel)
     }
 }
