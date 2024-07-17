@@ -24,10 +24,11 @@ final class HomeViewModel: HomeViewModelType {
     @Published var viewType: HomeViewType = .list
     @Published var featuring: Featuring = .popular {
         didSet {
-            featuringChange()
+            page = 1
+            fetchMovies(loading: true)
         }
     }
-    
+    private var page: Int = 1
     private let logger = Logger()
     private let getPopularMovies: GetPopularMoviesUseCaseType
     private let getPlayingMovies: GetPlayingMoviesUseCaseType
@@ -48,19 +49,23 @@ final class HomeViewModel: HomeViewModelType {
     }
     
     func viewAppear() {
-        fetchPopularMovies()
+        fetchPopularMovies(loading: true)
     }
     
     func showed(item: Movie) {
-        guard let index = items.firstIndex(where: { $0.id == item.id }),
-              items[index].image == nil
-        else { return }
+        guard let index = items.firstIndex(where: { $0.id == item.id }) else { return }
         Task {
             do {
                 let liked = try await !getFavoriteMovie.execute(id: item.id).isEmpty
                 await updateLiked(for: index, with: liked)
-                let data = try await getPosterMovie.execute(path: item.poster_path, size: .w154)
-                await updateImage(for: index, with: data)
+                if items[index].image == nil {
+                    let data = try await getPosterMovie.execute(path: item.poster_path, size: .w154)
+                    await updateImage(for: index, with: data)
+                }
+                if index == items.count/2 {
+                    page = page + 1
+                    fetchMovies(loading: false)
+                }
             } catch {
                 logger.error("💥 Error fetching poster for movie \(item.poster_path)")
             }
@@ -85,33 +90,43 @@ final class HomeViewModel: HomeViewModelType {
         }
     }
     
-    private func featuringChange() {
+    private func fetchMovies(loading: Bool) {
         switch featuring {
         case .popular:
-            fetchPopularMovies()
+            fetchPopularMovies(loading: loading)
         case .playing:
-            fetchPlayingMovies()
+            fetchPlayingMovies(loading: loading)
         }
     }
     
-    private func fetchPopularMovies() {
+    private func fetchPopularMovies(loading: Bool) {
         Task {
             do {
-                await update(loading: true, movies: [])
-                let movies = try await getPopularMovies.execute()
-                await update(movies: movies)
+                await isLoading(loading: loading)
+                let movies = try await getPopularMovies.execute(page: page)
+                if loading {
+                    await isLoading(loading: false)
+                    await set(movies: movies)
+                } else  {
+                    await add(movies: movies)
+                }
             } catch {
                 logger.error("💥 Error fetching popular movies \(error)")
             }
         }
     }
     
-    private func fetchPlayingMovies() {
+    private func fetchPlayingMovies(loading: Bool) {
         Task {
             do {
-                await update(loading: true, movies: [])
-                let movies = try await getPlayingMovies.execute()
-                await update(movies: movies)
+                await isLoading(loading: loading)
+                let movies = try await getPlayingMovies.execute(page: page)
+                if loading {
+                    await isLoading(loading: false)
+                    await set(movies: movies)
+                } else {
+                    await add(movies: movies)
+                }
             } catch {
                 logger.error("💥 Error fetching playing movies \(error)")
             }
@@ -119,9 +134,18 @@ final class HomeViewModel: HomeViewModelType {
     }
     
     @MainActor
-    private func update(loading: Bool = false, movies: [Movie]) {
+    private func isLoading(loading: Bool) {
         isLoading = loading
+    }
+    
+    @MainActor
+    private func set(movies: [Movie]) {
         items = movies
+    }
+    
+    @MainActor
+    private func add(movies: [Movie]) {
+        items.append(contentsOf: movies)
     }
     
     @MainActor

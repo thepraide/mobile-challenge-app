@@ -6,7 +6,7 @@
 //
 
 protocol GetPopularMoviesUseCaseType {
-    func execute() async throws -> [Movie]
+    func execute(page: Int) async throws -> [Movie]
 }
 
 final class GetPopularMoviesUseCase: GetPopularMoviesUseCaseType {
@@ -17,8 +17,8 @@ final class GetPopularMoviesUseCase: GetPopularMoviesUseCaseType {
         self.apiClient = apiClient
     }
     
-    func execute() async throws -> [Movie] {
-        let api = PopularMoviesAPI(page: 1)
+    func execute(page: Int) async throws -> [Movie] {
+        let api = PopularMoviesAPI(page: page)
         let response: MoviesAPIResponse = try await apiClient.perform(request: api)
         return response.results
     }
