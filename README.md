@@ -2,6 +2,8 @@
 
 # Movies App
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=thepraide_mobile-challenge-app&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=thepraide_mobile-challenge-app)
+
 The MoviesApp is an iOS app that use the [API](https://api.themoviedb.org) from the https://www.themoviedb.org.
 
 ### The UI/UX
