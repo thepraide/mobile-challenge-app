@@ -4,10 +4,23 @@
 
 The MoviesApp is an iOS app that use the [API](https://api.themoviedb.org) from the https://www.themoviedb.org.
 
-The UI/UX is basically a simple List or Grid view to show all the poster and titles for the movies with posibility to liked some of them.
+### The UI/UX
+
+For this project is basically a simple List or Grid view to show all the poster and titles for the movies with posibility to liked some of them.
 
 Supports portrait and landscape orientation
 
 | Light    | Dark |
 | -------- | ------- |
-| January  | $250    |
+| <img src="https://github.com/thepraide/mobile-challenge-app/blob/main/images/challenge_light.gif?raw=true" >  | <img src = "https://github.com/thepraide/mobile-challenge-app/blob/main/images/challenge_dark.gif?raw=true">   |
+
+### Architecture
+
+The architecture that was chosen to use was MVVM+R mainly because of the ease of creating modules with the help of the [SwiftUI](https://developer.apple.com/xcode/swiftui/) framework.\
+Use cases were created for the domain layer and a network layer for API calls.
+
+##### Modular Diagram
+<img src="https://github.com/thepraide/mobile-challenge-app/blob/main/images/module-diagram.png" >
+
+##### App Diagram
+<img src = "https://github.com/thepraide/mobile-challenge-app/blob/main/images/app-diagram.png">
