@@ -49,7 +49,8 @@ final class HomeViewModel: HomeViewModelType {
     }
     
     func viewAppear() {
-        fetchPopularMovies(loading: true)
+        page = 1
+        fetchMovies(loading: true)
     }
     
     func showed(item: Movie) {

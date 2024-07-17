@@ -28,14 +28,18 @@ struct DetailView<ViewModel: DetailViewModelType>: View {
     }
     
     private func makeHeader() -> some View {
-        AsyncImage(url: URL(string: imageBasePath + viewModel.movie.poster_path)) { image in
-            image.resizable()
-        } placeholder: {
-            Color.gray
+        Group {
+            if let image = viewModel.movie.image {
+                Image(data: image)?
+                    .resizable()
+            } else {
+                EmptyView()
+                    .foregroundColor(.gray)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: UIScreen.main.bounds.height/2)
         .overlay {
-            LinearGradient(colors: [.black, .clear], 
+            LinearGradient(colors: [.black, .clear],
                            startPoint: .top, endPoint: .bottom)
         }
     }

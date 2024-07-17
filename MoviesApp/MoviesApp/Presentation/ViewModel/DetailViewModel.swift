@@ -18,21 +18,27 @@ final class DetailViewModel: DetailViewModelType {
 
     private let logger = Logger()
     @Published var genres: [Genre] = []
+    @Published var movie: Movie
     
-    let movie: Movie
-    let getMovieGenres: GetMovieGenresType
+    private let getMovieGenres: GetMovieGenresType
+    private let getPoster: GetPosterUseCaseType
     
     init(movie: Movie,
-         getMovieGenres: GetMovieGenresType) {
+         getMovieGenres: GetMovieGenresType,
+         getPoster: GetPosterUseCaseType) {
         self.movie = movie
         self.getMovieGenres = getMovieGenres
+        self.getPoster = getPoster
     }
     
     func viewAppear() {
         Task {
             do {
-                let genres = try await getMovieGenres.execute(from: movie.genre_ids)
-                await update(genres: genres)
+                async let image = getPoster.execute(path: movie.poster_path, size: .w500)
+                async let genres = getMovieGenres.execute(from: movie.genre_ids)
+                let result = (try await image, try await genres)
+                await update(image: result.0)
+                await update(genres: result.1)
             } catch {
                 logger.error("💥 Error getting movie genres: \(error)")
             }
@@ -42,5 +48,10 @@ final class DetailViewModel: DetailViewModelType {
     @MainActor
     private func update(genres: [Genre]) {
         self.genres = genres
+    }
+    
+    @MainActor
+    private func update(image: Data) {
+        self.movie.image = image
     }
 }

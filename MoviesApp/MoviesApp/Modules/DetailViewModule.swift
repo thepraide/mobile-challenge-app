@@ -11,8 +11,10 @@ enum DetailViewModule {
     
     static func compose(movie: Movie) -> some View {
         let getMoviesGenres = GetMovieGenres()
+        let getPosterUseCase = GetPosterUseCase()
         let viewModel = DetailViewModel(movie: movie,
-                                        getMovieGenres: getMoviesGenres)
+                                        getMovieGenres: getMoviesGenres,
+                                        getPoster: getPosterUseCase)
         return DetailView(viewModel: viewModel)
     }
 }
