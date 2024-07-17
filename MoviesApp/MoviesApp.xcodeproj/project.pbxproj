@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B990A8A32C4876D900518C09 /* MoviesAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B990A8A22C4876D900518C09 /* MoviesAppUITestsLaunchTests.swift */; };
 		B99438C32C47933900BE02A5 /* Image+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C22C47933900BE02A5 /* Image+Data.swift */; };
 		B99438C52C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C42C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift */; };
 		B99438C72C47AF5900BE02A5 /* FavoriteMovie+Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = B99438C62C47AF5900BE02A5 /* FavoriteMovie+Movie.swift */; };
@@ -82,6 +83,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B990A8A22C4876D900518C09 /* MoviesAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoviesAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		B99438C22C47933900BE02A5 /* Image+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+Data.swift"; sourceTree = "<group>"; };
 		B99438C42C47AD3B00BE02A5 /* GetFavoriteMovieUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFavoriteMovieUseCase.swift; sourceTree = "<group>"; };
 		B99438C62C47AF5900BE02A5 /* FavoriteMovie+Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteMovie+Movie.swift"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 		B9E421D62C43353400BC47EF /* MoviesAppUITests */ = {
 			isa = PBXGroup;
 			children = (
+				B990A8A22C4876D900518C09 /* MoviesAppUITestsLaunchTests.swift */,
 				B9E421D72C43353400BC47EF /* MoviesAppUITests.swift */,
 			);
 			path = MoviesAppUITests;
@@ -632,6 +635,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B9E421D82C43353400BC47EF /* MoviesAppUITests.swift in Sources */,
+				B990A8A32C4876D900518C09 /* MoviesAppUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
