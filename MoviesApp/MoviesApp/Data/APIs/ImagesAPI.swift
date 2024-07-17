@@ -10,6 +10,7 @@ enum ImagesAPISize: String {
     case w154
     case w500
 }
+
 struct ImagesAPI: APIRequest {
     var endpoint: String {
         "/t/p/\(size.rawValue+path)"
