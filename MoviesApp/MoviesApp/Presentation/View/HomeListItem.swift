@@ -9,7 +9,8 @@ import SwiftUI
 
 struct HomeListItem: View {
     
-    var item: Movie
+    let item: Movie
+    var itemLiked: ((Bool) -> Void)
     
     var body: some View {
         HStack {
@@ -17,6 +18,9 @@ struct HomeListItem: View {
                 Image(data: image)?
                     .resizable()
                     .frame(width: 100, height: 150)
+                    .overlay {
+                        LinearGradient(gradient: Gradient(colors: [.black, .clear, .clear]), startPoint: .top, endPoint: .bottom)
+                    }
                     .cornerRadius(10)
             } else {
                 RoundedRectangle(cornerRadius: 10)
@@ -39,9 +43,9 @@ struct HomeListItem: View {
             
             VStack {
                 Button {
-                    print("liked")
+                    itemLiked(!(item.liked ?? false))
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: item.liked ?? false ? "heart.fill" : "heart")
                         .padding(.top, 10)
                 }
                 .clipped()

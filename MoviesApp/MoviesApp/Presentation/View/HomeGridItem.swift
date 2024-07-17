@@ -9,25 +9,31 @@ import SwiftUI
 
 struct HomeGridItem: View {
     
-    let movie: Movie
-    let imageBasePath: String = "https://image.tmdb.org/t/p/w154/"
+    let item: Movie
+    var itemLiked: ((Bool) -> Void)
     
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageBasePath + movie.poster_path)) { image in
-                image.resizable()
-            } placeholder: {
-                Color.gray
-            }
-            .frame(width: 100, height: 150)
-            .overlay {
-                LinearGradient(gradient: Gradient(colors: [.black, .clear, .clear]), startPoint: .top, endPoint: .bottom)
+            Group {
+                if let image = item.image {
+                    Image(data: image)?
+                        .resizable()
+                        .frame(width: 100, height: 150)
+                        .cornerRadius(10)
+                        .overlay {
+                            LinearGradient(gradient: Gradient(colors: [.black, .clear, .clear]), startPoint: .top, endPoint: .bottom)
+                        }
+                } else {
+                    RoundedRectangle(cornerRadius: 10)
+                        .frame(width: 100, height: 150)
+                        .foregroundColor(.gray)
+                }
             }
             .overlay(alignment: .topTrailing) {
                 Button {
-                    print("liked")
+                    itemLiked(!(item.liked ?? false))
                 } label: {
-                    Image(systemName: "heart")
+                    Image(systemName: item.liked ?? false ? "heart.fill" : "heart")
                         .padding([.top, .trailing], 10)
                 }
                 .clipped()
@@ -35,7 +41,7 @@ struct HomeGridItem: View {
             }
             .cornerRadius(10)
             
-            Text(movie.title)
+            Text(item.title)
                 .font(.footnote)
                 .bold()
         }

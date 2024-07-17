@@ -14,9 +14,14 @@ enum HomeViewModule {
         let authClient = AuthRestAPIClient(client: client, tokenProvider: LocalTokenProvider())
         let popularMoviesUseCase = GetPopularMoviesUseCase(apiClient: authClient)
         let playingMoviesUseCase = GetPlayingMoviesUseCase(apiClient: authClient)
+        let getPosterUseCase = GetPosterUseCase()
+        let saveFavoriteMovieUseCase = SaveMovieUseCase()
+        let getFavoriteMovieUseCase = GetFavoriteMovieUseCase()
         let viewModel = HomeViewModel(getPopularMovies: popularMoviesUseCase,
                                       getPlayingMovies: playingMoviesUseCase, 
-                                      getPosterMovie: GetPosterUseCase())
+                                      getPosterMovie: getPosterUseCase,
+                                      saveFavoriteMovie: saveFavoriteMovieUseCase,
+                                      getFavoriteMovie: getFavoriteMovieUseCase)
         return HomeView(viewModel: viewModel)
     }
 }

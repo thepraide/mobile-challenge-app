@@ -74,14 +74,16 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
             makeFeaturingPicker()
             
             List(viewModel.items, id: \.self.id) { item in
-                HomeListItem(item: item)
-                    .listRowSeparator(.hidden)
-                    .task {
-                        viewModel.show(item: item)
-                    }
-                    .onTapGesture {
-                        router.navigate(to: .detail(movie: item))
-                    }
+                HomeListItem(item: item) { value in
+                    viewModel.liked(item: item, value: value)
+                }
+                .listRowSeparator(.hidden)
+                .task {
+                    viewModel.showed(item: item)
+                }
+                .onTapGesture {
+                    router.navigate(to: .detail(movie: item))
+                }
             }
             .listStyle(.plain)
             .background(.clear)
@@ -94,11 +96,16 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
             
             ScrollView {
                 LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())] , spacing: 20) {
-                    ForEach(viewModel.items, id: \.self.id) { movie in
-                        HomeGridItem(movie: movie)
-                            .onTapGesture {
-                                router.navigate(to: .detail(movie: movie))
-                            }
+                    ForEach(viewModel.items, id: \.self.id) { item in
+                        HomeGridItem(item: item) { value in
+                            viewModel.liked(item: item, value: value)
+                        }
+                        .task {
+                            viewModel.showed(item: item)
+                        }
+                        .onTapGesture {
+                            router.navigate(to: .detail(movie: item))
+                        }
                     }
                 }
             }

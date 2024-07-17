@@ -14,7 +14,8 @@ protocol HomeViewModelType: ObservableObject {
     var viewType: HomeViewType { get set }
     var featuring: Featuring { get set }
     func viewAppear()
-    func show(item: Movie)
+    func showed(item: Movie)
+    func liked(item: Movie, value: Bool)
 }
 
 final class HomeViewModel: HomeViewModelType {
@@ -31,25 +32,33 @@ final class HomeViewModel: HomeViewModelType {
     private let getPopularMovies: GetPopularMoviesUseCaseType
     private let getPlayingMovies: GetPlayingMoviesUseCaseType
     private let getPosterMovie: GetPosterUseCaseType
+    private let saveFavoriteMovie: SaveMovieUseCaseType
+    private let getFavoriteMovie: GetFavoriteMovieUseCase
     
     init(getPopularMovies: GetPopularMoviesUseCaseType,
          getPlayingMovies: GetPlayingMoviesUseCaseType,
-         getPosterMovie: GetPosterUseCaseType) {
+         getPosterMovie: GetPosterUseCaseType,
+         saveFavoriteMovie: SaveMovieUseCaseType,
+         getFavoriteMovie: GetFavoriteMovieUseCase) {
         self.getPopularMovies = getPopularMovies
         self.getPlayingMovies = getPlayingMovies
         self.getPosterMovie = getPosterMovie
+        self.saveFavoriteMovie = saveFavoriteMovie
+        self.getFavoriteMovie = getFavoriteMovie
     }
     
     func viewAppear() {
         fetchPopularMovies()
     }
     
-    func show(item: Movie) {
+    func showed(item: Movie) {
         guard let index = items.firstIndex(where: { $0.id == item.id }),
               items[index].image == nil
         else { return }
         Task {
             do {
+                let liked = try await !getFavoriteMovie.execute(id: item.id).isEmpty
+                await updateLiked(for: index, with: liked)
                 let data = try await getPosterMovie.execute(path: item.poster_path, size: .w154)
                 await updateImage(for: index, with: data)
             } catch {
@@ -58,7 +67,25 @@ final class HomeViewModel: HomeViewModelType {
         }
     }
     
-    func featuringChange() {
+    func liked(item: Movie, value: Bool) {
+        guard let index = items.firstIndex(where: { $0.id == item.id }) else {
+            return
+        }
+        Task {
+            do {
+                if value {
+                    try await saveFavoriteMovie.execute(movie: item)
+                } else {
+                    //TODO: Delete from favorites
+                }
+                await updateLiked(for: index, with: value)
+            } catch {
+                logger.error("💥 Error saving movie \(error)")
+            }
+        }
+    }
+    
+    private func featuringChange() {
         switch featuring {
         case .popular:
             fetchPopularMovies()
@@ -100,5 +127,10 @@ final class HomeViewModel: HomeViewModelType {
     @MainActor
     private func updateImage(for index: Int, with data: Data) {
         items[index].image = data
+    }
+    
+    @MainActor
+    private func updateLiked(for index: Int, with value: Bool) {
+        items[index].liked = value
     }
 }
