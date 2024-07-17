@@ -73,11 +73,14 @@ struct HomeView<ViewModel: HomeViewModelType>: View {
         VStack {
             makeFeaturingPicker()
             
-            List(viewModel.items, id: \.self.id) { movie in
-                HomeListItem(movie: movie)
+            List(viewModel.items, id: \.self.id) { item in
+                HomeListItem(item: item)
                     .listRowSeparator(.hidden)
+                    .task {
+                        viewModel.show(item: item)
+                    }
                     .onTapGesture {
-                        router.navigate(to: .detail(movie: movie))
+                        router.navigate(to: .detail(movie: item))
                     }
             }
             .listStyle(.plain)

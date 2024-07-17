@@ -15,7 +15,8 @@ enum HomeViewModule {
         let popularMoviesUseCase = GetPopularMoviesUseCase(apiClient: authClient)
         let playingMoviesUseCase = GetPlayingMoviesUseCase(apiClient: authClient)
         let viewModel = HomeViewModel(getPopularMovies: popularMoviesUseCase,
-                                      getPlayingMovies: playingMoviesUseCase)
+                                      getPlayingMovies: playingMoviesUseCase, 
+                                      getPosterMovie: GetPosterUseCase())
         return HomeView(viewModel: viewModel)
     }
 }

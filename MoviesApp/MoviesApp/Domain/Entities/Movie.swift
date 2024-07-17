@@ -17,4 +17,5 @@ struct Movie: Decodable, Hashable {
     let release_date: String
     let original_language: String
     let vote_average: Double
+    var image: Data?
 }

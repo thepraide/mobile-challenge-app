@@ -9,27 +9,29 @@ import SwiftUI
 
 struct HomeListItem: View {
     
-    let movie: Movie
-    let imageBasePath: String = "https://image.tmdb.org/t/p/w154/"
+    var item: Movie
     
     var body: some View {
         HStack {
-            AsyncImage(url: URL(string: imageBasePath + movie.poster_path)) { image in
-                image.resizable()
-            } placeholder: {
-                Color.gray
+            if let image = item.image {
+                Image(data: image)?
+                    .resizable()
+                    .frame(width: 100, height: 150)
+                    .cornerRadius(10)
+            } else {
+                RoundedRectangle(cornerRadius: 10)
+                    .frame(width: 100, height: 150)
+                    .foregroundColor(.gray)
             }
-            .frame(width: 100, height: 150)
-            .cornerRadius(10)
             
             VStack(alignment: .leading) {
-                Text(movie.title)
+                Text(item.title)
                     .font(.headline)
                     .frame(maxWidth: .infinity, alignment: .leading)
-                Text(movie.release_date)
+                Text(item.release_date)
                     .font(.caption)
                     .padding(.bottom, 3)
-                Text(movie.overview)
+                Text(item.overview)
                     .font(.caption)
                     .lineLimit(2)
                    

@@ -17,21 +17,21 @@ final class SaveGenresUseCase: SaveGenresUseCaseType {
     private let persistence = PersistenceController.shared
     
     func execute(genre: Genre) async throws {
-        let viewContext = persistence.container.viewContext
-        let local = LocalGenre(context: viewContext)
+        let context = persistence.container.viewContext
+        let local = LocalGenre(context: context)
         local.id = Int64(genre.id)
         local.name = genre.name
-        try viewContext.save()
+        try context.save()
     }
     
     func execute(genres: [Genre]) async throws {
-        let viewContext = persistence.container.viewContext
+        let context = persistence.container.viewContext
         for genre in genres {
-            let local = LocalGenre(context: viewContext)
+            let local = LocalGenre(context: context)
             local.id = Int64(genre.id)
             local.name = genre.name
         }
         
-        try viewContext.save()
+        try context.save()
     }
 }

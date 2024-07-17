@@ -14,6 +14,7 @@ protocol HomeViewModelType: ObservableObject {
     var viewType: HomeViewType { get set }
     var featuring: Featuring { get set }
     func viewAppear()
+    func show(item: Movie)
 }
 
 final class HomeViewModel: HomeViewModelType {
@@ -29,15 +30,32 @@ final class HomeViewModel: HomeViewModelType {
     private let logger = Logger()
     private let getPopularMovies: GetPopularMoviesUseCaseType
     private let getPlayingMovies: GetPlayingMoviesUseCaseType
+    private let getPosterMovie: GetPosterUseCaseType
     
     init(getPopularMovies: GetPopularMoviesUseCaseType,
-         getPlayingMovies: GetPlayingMoviesUseCaseType) {
+         getPlayingMovies: GetPlayingMoviesUseCaseType,
+         getPosterMovie: GetPosterUseCaseType) {
         self.getPopularMovies = getPopularMovies
         self.getPlayingMovies = getPlayingMovies
+        self.getPosterMovie = getPosterMovie
     }
     
     func viewAppear() {
         fetchPopularMovies()
+    }
+    
+    func show(item: Movie) {
+        guard let index = items.firstIndex(where: { $0.id == item.id }),
+              items[index].image == nil
+        else { return }
+        Task {
+            do {
+                let data = try await getPosterMovie.execute(path: item.poster_path, size: .w154)
+                await updateImage(for: index, with: data)
+            } catch {
+                logger.error("💥 Error fetching poster for movie \(item.poster_path)")
+            }
+        }
     }
     
     func featuringChange() {
@@ -77,5 +95,10 @@ final class HomeViewModel: HomeViewModelType {
     private func update(loading: Bool = false, movies: [Movie]) {
         isLoading = loading
         items = movies
+    }
+    
+    @MainActor
+    private func updateImage(for index: Int, with data: Data) {
+        items[index].image = data
     }
 }
